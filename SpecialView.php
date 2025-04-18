@@ -1,7 +1,10 @@
 <?php
 namespace Avatar;
 
+use MediaWiki\Html\FormOptions;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Xml\Xml;
 
 class SpecialView extends \SpecialPage {
 
@@ -22,7 +25,7 @@ class SpecialView extends \SpecialPage {
 		$this->outputHeader();
 
 		// Parse options
-		$opt = new \FormOptions;
+		$opt = new FormOptions;
 		$opt->add('user', '');
 		$opt->add('delete', '');
 		$opt->add('reason', '');
@@ -61,11 +64,11 @@ class SpecialView extends \SpecialPage {
 			$haveAvatar = Avatars::hasAvatar($userObj);
 
 			if ($haveAvatar) {
-				$html = \Xml::tags('img', array(
+				$html = Xml::tags('img', array(
 					'src' => Avatars::getLinkFor($user, 'original') . '&nocache&ver=' . dechex(time()),
 					'height' => 400,
 				), '');
-				$html = \Xml::tags('p', array(), $html);
+				$html = Xml::tags('p', array(), $html);
 				$this->getOutput()->addHTML($html);
 
 				// Add a delete button
@@ -84,9 +87,9 @@ class SpecialView extends \SpecialPage {
 		global $wgScript;
 
 		// This is essential as we need to submit the form to this page
-		$html = \Html::hidden('title', $this->getPageTitle());
+		$html = Html::hidden('title', $this->getPageTitle());
 
-		$html .= \Xml::inputLabel(
+		$html .= Xml::inputLabel(
 			$this->msg('viewavatar-username')->text(),
 			'user',
 			'',
@@ -98,13 +101,13 @@ class SpecialView extends \SpecialPage {
 		$html .= ' ';
 
 		// Submit button
-		$html .= \Xml::submitButton($this->msg('viewavatar-submit')->text());
+		$html .= Xml::submitButton($this->msg('viewavatar-submit')->text());
 
 		// Fieldset
-		$html = \Xml::fieldset($this->msg('viewavatar-legend')->text(), $html);
+		$html = Xml::fieldset($this->msg('viewavatar-legend')->text(), $html);
 
 		// Wrap with a form
-		$html = \Xml::tags('form', array('action' => $wgScript, 'method' => 'get'), $html);
+		$html = Xml::tags('form', array('action' => $wgScript, 'method' => 'get'), $html);
 
 		$this->getOutput()->addHTML($html);
 	}
@@ -113,11 +116,11 @@ class SpecialView extends \SpecialPage {
 		global $wgScript;
 
 		// This is essential as we need to submit the form to this page
-		$html = \Html::hidden('title', $this->getPageTitle());
-		$html .= \Html::hidden('delete', 'true');
-		$html .= \Html::hidden('user', $user);
+		$html = Html::hidden('title', $this->getPageTitle());
+		$html .= Html::hidden('delete', 'true');
+		$html .= Html::hidden('user', $user);
 
-		$html .= \Xml::inputLabel(
+		$html .= Xml::inputLabel(
 			$this->msg('viewavatar-delete-reason')->text(),
 			'reason',
 			'',
@@ -127,13 +130,13 @@ class SpecialView extends \SpecialPage {
 		$html .= ' ';
 
 		// Submit button
-		$html .= \Xml::submitButton($this->msg('viewavatar-delete-submit')->text());
+		$html .= Xml::submitButton($this->msg('viewavatar-delete-submit')->text());
 
 		// Fieldset
-		$html = \Xml::fieldset($this->msg('viewavatar-delete-legend')->text(), $html);
+		$html = Xml::fieldset($this->msg('viewavatar-delete-legend')->text(), $html);
 
 		// Wrap with a form
-		$html = \Xml::tags('form', array('action' => $wgScript, 'method' => 'get'), $html);
+		$html = Xml::tags('form', array('action' => $wgScript, 'method' => 'get'), $html);
 
 		$this->getOutput()->addHTML($html);
 	}
