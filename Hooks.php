@@ -29,6 +29,7 @@ class Hooks {
 				'href' => \SpecialPage::getTitleFor('ViewAvatar')->getLocalURL(array(
 					'user' => $user->getName(),
 				)),
+				'id' => 't-viewavatar',
 			];
 		}
 	}
