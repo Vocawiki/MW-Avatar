@@ -77,7 +77,7 @@
 		"avatar/delete": "LogFormatter"
 	},
 	"config": {
-		"DefaultAvatar": "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y",
+		"DefaultAvatar": "/extensions/Avatar/assets/default-avatar.jpg",
 		"MaxAvatarResolution": 256,
 		"AllowedAvatarRes": [64, 128], 
 		"DefaultAvatarRes": 128,
