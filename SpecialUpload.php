@@ -123,7 +123,7 @@ class SpecialUpload extends \SpecialPage {
 		$html .= ' ';
 
 		// Submit button
-		$html .= Xml::submitButton($this->msg('uploadavatar-submit')->text());
+		$html .= Html::submitButton($this->msg('uploadavatar-submit')->text());
 
 		// Wrap with a form
 		$html = Xml::tags('form', array('action' => $this->getPageTitle()->getLinkURL(), 'method' => 'post'), $html);
